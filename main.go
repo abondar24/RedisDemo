@@ -2,6 +2,7 @@ package main
 
 import (
 	"flag"
+	"github.com/abondar24/RedisDemo/examples"
 	"github.com/go-redis/redis/v8"
 	"log"
 )
@@ -9,10 +10,22 @@ import (
 func main() {
 	demoName := flag.String("demo", "", "which example to run")
 
+	pwd := ""
+	db := 0
+	client := initClient(&pwd, &db)
+
+	voter := examples.NewVoter(client)
+
 	flag.Parse()
 	if *demoName == "" {
 		log.Fatal("No example provided")
 	}
+
+	switch *demoName {
+	case "voter":
+		voter.RunVoter()
+	}
+
 }
 
 func initClient(password *string, db *int) *redis.Client {
