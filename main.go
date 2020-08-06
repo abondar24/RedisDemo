@@ -3,7 +3,6 @@ package main
 import (
 	"flag"
 	"github.com/abondar24/RedisDemo/examples"
-	"github.com/go-redis/redis/v8"
 	"log"
 )
 
@@ -12,9 +11,7 @@ func main() {
 
 	pwd := ""
 	db := 0
-	client := initClient(&pwd, &db)
-
-	voter := examples.NewVoter(client)
+	client := examples.NewClient(&pwd, &db)
 
 	flag.Parse()
 	if *demoName == "" {
@@ -23,16 +20,7 @@ func main() {
 
 	switch *demoName {
 	case "voter":
-		voter.RunVoter()
+		client.RunVoter()
 	}
-
-}
-
-func initClient(password *string, db *int) *redis.Client {
-	return redis.NewClient(&redis.Options{
-		Addr:     "localhost:6379",
-		Password: *password,
-		DB:       *db,
-	})
 
 }
