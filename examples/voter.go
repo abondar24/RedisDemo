@@ -2,6 +2,7 @@ package examples
 
 import (
 	"context"
+	"fmt"
 	"github.com/go-redis/redis/v8"
 	"time"
 )
@@ -17,11 +18,11 @@ const (
 	Score    int    = 512
 	VotedKey string = "voted:"
 	ScoreKey string = "score:"
-	TimeKey  string = "time:"
-	VotesKey string = "votes:"
+	TimeKey  string = "time"
+	VotesKey string = "votes"
 	IdKey    string = "id:"
-	UserKey  string = "user:"
-	LinkKey  string = "link:"
+	UserKey  string = "user"
+	LinkKey  string = "link"
 )
 
 func NewVoter(client *redis.Client) *Voter {
@@ -36,6 +37,7 @@ func (v *Voter) RunVoter() {
 
 	v.post(&user, &userId, &link)
 	v.vote(&user, &userId)
+	v.readPosts()
 }
 
 func (v *Voter) vote(user, id *string) {
@@ -70,6 +72,14 @@ func (v *Voter) post(user, id, link *string) {
 	})
 
 	//post score and time
-	v.client.ZAdd(*v.ctx, ScoreKey, &redis.Z{Score: float64(Score), Member: id})
-	v.client.ZAdd(*v.ctx, TimeKey, &redis.Z{Score: float64(now), Member: id})
+	v.client.ZAdd(*v.ctx, ScoreKey, &redis.Z{Score: float64(Score + 100), Member: postId})
+}
+
+func (v *Voter) readPosts() {
+
+	ids := v.client.ZRevRange(*v.ctx, ScoreKey, 0, 100).Val()
+	for _, id := range ids {
+		fmt.Println(id)
+		fmt.Println(v.client.HGetAll(*v.ctx, id).Val())
+	}
 }
