@@ -21,6 +21,10 @@ func main() {
 	switch *demoName {
 	case "voter":
 		client.RunVoter()
+
+	case "token":
+		client.RunToken()
+
 	}
 
 }
