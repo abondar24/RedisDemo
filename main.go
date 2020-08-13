@@ -28,6 +28,12 @@ func main() {
 	case "tr":
 		client.RunTransaction()
 
+	case "log":
+		client.RunLogs()
+
+	case "counter":
+		client.RunCounter()
+
 	}
 
 }
