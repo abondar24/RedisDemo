@@ -25,6 +25,9 @@ func main() {
 	case "token":
 		client.RunToken()
 
+	case "tr":
+		client.RunTransaction()
+
 	}
 
 }
