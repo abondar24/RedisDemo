@@ -12,3 +12,4 @@ Go-Redis demo (Based on Redis In Action book)
 
 5. Counter: store and print counter (counter)
 
+6. Autocomplete: autocomplete search (ac)

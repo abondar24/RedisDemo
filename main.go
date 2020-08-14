@@ -34,6 +34,8 @@ func main() {
 	case "counter":
 		client.RunCounter()
 
+	case "ac":
+		client.RunAutocomplete()
 	}
 
 }
