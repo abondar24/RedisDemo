@@ -15,3 +15,6 @@ Go-Redis demo (Based on Redis In Action book)
 6. Autocomplete: autocomplete search (ac)
 
 7. Async: release and acquire locks and semaphores (async)
+
+8. Queue: write and read to queue (queue)
+

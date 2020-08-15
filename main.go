@@ -39,6 +39,9 @@ func main() {
 
 	case "async":
 		client.RunAsync()
+
+	case "queue":
+		client.RunQueue()
 	}
 
 }
