@@ -36,6 +36,9 @@ func main() {
 
 	case "ac":
 		client.RunAutocomplete()
+
+	case "async":
+		client.RunAsync()
 	}
 
 }
