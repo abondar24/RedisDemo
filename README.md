@@ -18,3 +18,4 @@ Go-Redis demo (Based on Redis In Action book)
 
 8. Queue: write and read to queue (queue)
 
+9. Messaging: messaging topic (msg)

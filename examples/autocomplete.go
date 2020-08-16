@@ -9,8 +9,8 @@ import (
 )
 
 const (
-	ValidChars = "`abcdefghijklmnopqrstuvwxyz{"
-	MembersKey = "members:"
+	ValidChars  = "`abcdefghijklmnopqrstuvwxyz{"
+	MessagesKey = "members:"
 )
 
 func (cl *Client) RunAutocomplete() {
@@ -76,7 +76,7 @@ func (cl *Client) autoCompletePrefix(guild, prefix *string) {
 	id := uuid.New().String()
 	start += id
 	end += id
-	zSetName := MembersKey + *guild
+	zSetName := MessagesKey + *guild
 	var items []string
 
 	cl.client.ZAdd(*cl.ctx, zSetName, &redis.Z{Member: start, Score: 0}, &redis.Z{Member: start, Score: 0})
@@ -130,11 +130,11 @@ func (cl *Client) findPrefixRange(prefix string) (string, string) {
 }
 
 func (cl *Client) joinGuild(guild, user *string) {
-	cl.client.ZAdd(*cl.ctx, MembersKey+*guild, &redis.Z{Member: *user, Score: 0})
+	cl.client.ZAdd(*cl.ctx, MessagesKey+*guild, &redis.Z{Member: *user, Score: 0})
 }
 
 func (cl *Client) leaveGuild(guild, user *string) {
-	cl.client.ZRem(*cl.ctx, MembersKey+*guild, *user)
+	cl.client.ZRem(*cl.ctx, MessagesKey+*guild, *user)
 }
 
 func (cl *Client) min(a, b int64) int64 {

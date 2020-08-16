@@ -42,6 +42,9 @@ func main() {
 
 	case "queue":
 		client.RunQueue()
+
+	case "msg":
+		client.RunMessaging()
 	}
 
 }
