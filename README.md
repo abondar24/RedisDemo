@@ -1,4 +1,4 @@
-#Redis Demo
+# Redis Demo
 
 Go-Redis demo (Based on Redis In Action book)
 
@@ -19,3 +19,16 @@ Go-Redis demo (Based on Redis In Action book)
 8. Queue: write and read to queue (queue)
 
 9. Messaging: messaging topic (msg)
+
+
+## Build and run
+```yaml
+go get
+
+go build
+
+./RediaDemo --demo=<demo_name_from_brackets>
+
+```
+
+PS some demos have no output so check redis db
